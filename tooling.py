@@ -3,13 +3,18 @@ import datetime
 import socket
 import keyboard
 import sys
+import netgrab
+import allgrab
+import performgrab
 
 class Tooling():
     def __init__(self, user, timestamp):
+        # Establishing user and timestamp variables at program start.
         self.user = user
         self.timestamp = timestamp
 
     def do_action(self):
+        # Collect user option and call respective module to show data.
         print(f"Hey Current User: {self.user}.\nIt is currently {self.timestamp}")
         option = self.get_user_option()
         self.do_option_processing(option)
@@ -18,23 +23,15 @@ class Tooling():
     def do_option_processing(self, option):
         if option == 1:
             print("Showing all information...")
+            allgrab.AllGrab()
         elif option == 2:
             print("Showing network information...")
+            netgrab.NetGrab()
         elif option == 3:
             print("Showing performance information...")
         else:
             print("Unexpected input. Exiting...")
             sys.exit()
-
-    def gather_all_information(self):
-        pass
-
-    def gather_network_information(self):
-        print(f"Local IP Address: {socket.gethostbyname(socket.gethostname())}")
-        pass
-
-    def gather_performance_information(self):
-        pass
 
     def get_user_option(self):
         user_option = None
